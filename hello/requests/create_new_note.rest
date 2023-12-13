@@ -1,0 +1,8 @@
+POST http://localhost:3004/api/notes
+Content-Type: application/json 
+
+{
+    "id" : "6",
+    "content": "test for render",
+    "important": true
+}
