@@ -1,1 +1,1 @@
-GET http://localhost:3007/api/persons
+GET https://phonebook-render-vrch.onrender.com/api/persons
