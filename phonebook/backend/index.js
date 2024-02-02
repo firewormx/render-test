@@ -79,7 +79,7 @@ return maxId + 1;
     number: body.number || "",
     id: generatedId()
    }
- persons = notes.concat(newPerson);
+ persons = persons.concat(newPerson);
 
  response.json(newPerson);
   });
