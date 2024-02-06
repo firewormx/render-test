@@ -1,4 +1,4 @@
-GET http://localhost:3004/api/notes/
+GET http://localhost:3004/api/notes
 
 ###
 POST http://localhost:3004/api/notes/ HTTP/1.1

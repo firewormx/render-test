@@ -81,31 +81,40 @@ const App = () => {
 const handleSubmit = (event) =>{
   event.preventDefault();
 
+  const generatedId = () =>{
+    const maxId= persons.length > 0
+    ? Math.max(...persons.map(person =>person.id))
+    :0
+return maxId + 1;
+}
+
 const newNameObject ={
   name: newName,
   number: newNumber,
+  id: generatedId()
 }
 
-const existingPerson = persons.some(person => person.name === newName);
+const existingPerson = persons.find(person => person.name === newName);
 
 if (existingPerson){
-const person = persons.find(per=> per.name === newName);
-const changedPerson ={...person, number:newNumber};
+const targetPerson = persons.find(per=> per.name === newName);
+const changedPerson ={...targetPerson, number: newNumber};
 
   alert(`${newName} is already added to phonebook, replace the old number with a new one?`);
 
-    personService.update(person.id, changedPerson)
+    personService.update(targetPerson.id, changedPerson)
     .then(returnedPerson => {
       console.log(returnedPerson);
-    setPersons(persons.map(per =>per.id !== returnedPerson.id ? per : returnedPerson));
+    setPersons(persons.map(person=> person.id !== targetPerson.id ? person : returnedPerson));
+  
     })
     .catch(error => {
       console.log(error);
-  setNotifications(`Information of "${person.name}"has already been removed from server`);
+      setNotifications(`Information of ${newName} has already been changed from server`);
   setTimeout(()=>{
     setNotifications(null);
   }, 2000)
-     setPersons(persons.filter(per.id !== person.id));
+    //  setPersons(persons.filter(per=> per.id !== person.id));
     }
       
       );

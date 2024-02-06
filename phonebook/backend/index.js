@@ -62,6 +62,7 @@ response.send(`<h1>Hello World!</h1>`)
 app.get(`/api/persons`, (request, response)=>{
 response.json(persons);
 })
+
 const generatedId = () =>{
     const maxId= persons.length > 0
     ? Math.max(...persons.map(person =>person.id))
@@ -79,7 +80,7 @@ return maxId + 1;
     number: body.number || "",
     id: generatedId()
    }
- persons = notes.concat(newPerson);
+ persons = persons.concat(newPerson);
 
  response.json(newPerson);
   });
@@ -92,6 +93,21 @@ return maxId + 1;
       person ? response.json(person) : response.status(404).end()
 response.json(person);
 });
+
+app.put(`/api/persons/:id`,(request, response)=>{
+ const id = Number(request.params.id);
+ console.log(id);
+ const body = request.body;
+
+ const changedPerson = {
+  name: body.name,
+  number: body.number,
+  id: generatedId()
+ }
+persons = persons.map(person => person.id !== id ?  person :  changedPerson);
+response.json(persons);
+
+})
 
 app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id);
