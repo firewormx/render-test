@@ -102,10 +102,10 @@ app.put(`/api/persons/:id`,(request, response)=>{
  const changedPerson = {
   name: body.name,
   number: body.number,
-  id: generatedId()
+  id: body.id
  }
 persons = persons.map(person => person.id !== id ?  person :  changedPerson);
-response.json(persons);
+response.json(changedPerson);
 
 })
 

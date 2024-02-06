@@ -66,6 +66,7 @@ console.log(`render`, notes.length, `notes`);
     setNotes(notes.map(n => n.id !== id ? n : returnedNote))
   }).catch(error =>{
     // setErrorMessage(`Note "${note.content}" was already removed from server`);
+    console.log(error);
     setTimeout(()=>{
     setErrorMessage(null);
     }, 5000);
