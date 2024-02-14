@@ -106,11 +106,11 @@ const changedPerson ={...targetPerson, number: newNumber};
     .then(returnedPerson => {
       console.log(returnedPerson);
     setPersons(persons.map(person=> person.id !== targetPerson.id ? person : returnedPerson));
+    setNotifications(`Information of ${newName} has already been changed from server`);
   
     })
     .catch(error => {
       console.log(error);
-      setNotifications(`Information of ${newName} has already been changed from server`);
   setTimeout(()=>{
     setNotifications(null);
   }, 2000)
