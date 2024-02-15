@@ -84,7 +84,7 @@ response.json(note);
 });
 
 app.put(`/api/notes/:id`, (request, response)=>{
-const id = request.params.id;
+const id = Nunber(request.params.id);
 const body = request.body;
 
 const changedNote = {
@@ -96,6 +96,7 @@ notes = notes.map(note => note.id !== id ? note : changedNote);
 changedNote ? response.json(changedNote) : response.status(404).end();
 response.json(changedNote);
 })
+
 app.delete('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id);
     console.log(id)
