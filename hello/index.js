@@ -84,7 +84,7 @@ response.json(note);
 });
 
 app.put(`/api/notes/:id`, (request, response)=>{
-const id = Nunber(request.params.id);
+const id = Number(request.params.id);
 const body = request.body;
 
 const changedNote = {
