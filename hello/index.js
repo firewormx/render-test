@@ -83,6 +83,19 @@ return maxId + 1;
 response.json(note);
 });
 
+app.put(`/api/notes/:id`, (request, response)=>{
+const id = request.params.id;
+const body = request.body;
+
+const changedNote = {
+  content: body.content,
+  important: body.important,
+   id: body.id
+}
+notes = notes.map(note => note.id !== id ? note : changedNote);
+changedNote ? response.json(changedNote) : response.status(404).end();
+response.json(changedNote);
+})
 app.delete('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id);
     console.log(id)
@@ -97,7 +110,7 @@ app.delete('/api/notes/:id', (request, response) => {
   
 app.use(unknownEndpoint);
  
-const PORT = process.env.PORT || 3004
+const PORT = process.env.PORT || 3008
 app.listen((PORT), () =>{
     console.log(`Server running on port ${PORT}`)
 })
